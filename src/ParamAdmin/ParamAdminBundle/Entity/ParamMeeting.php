@@ -1,0 +1,320 @@
+<?php
+
+namespace ParamAdmin\ParamAdminBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Groups;
+
+/**
+ * ParamMeeting
+ *
+ * @ORM\Table(name="param__meeting", indexes={@ORM\Index(name="fk_param__meeting_param__associations1_idx", columns={"associations_id"}), @ORM\Index(name="fk_param__meeting_param__sessions1_idx", columns={"sessions_id"}), @ORM\Index(name="fk_param__meeting_member__members1_idx", columns={"members_id"})})
+ * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
+ */
+class ParamMeeting
+{
+    /**
+     * @var \String
+     *
+     * @ORM\Column(name="name", type="string", nullable=false)
+     */
+    private $name;
+    
+    /**
+     * @var \Date
+     *
+     * @ORM\Column(name="reception_date", type="date", nullable=false)
+     * 
+     * @Groups({"association", "member", "meeting", "eat"})
+     */
+    private $receptionDate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="place", type="string", length=100, nullable=false)
+     * 
+     * @Groups({"member", "association", "meeting", "eat"})
+     */
+    private $place;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime", nullable=false)
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     */
+    private $updatedAt;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * 
+     * @Groups({"association", "meeting", "eat"})
+     */
+    private $id;
+
+    /**
+     * @var \ParamAdmin\ParamAdminBundle\Entity\SysSessions
+     *
+     * @ORM\ManyToOne(targetEntity="ParamAdmin\ParamAdminBundle\Entity\SysSessions")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="sessions_id", referencedColumnName="id")
+     * })
+     */
+    private $sessions;
+
+    /**
+     * @var \ParamAdmin\ParamAdminBundle\Entity\SysAssociations
+     *
+     * @ORM\ManyToOne(targetEntity="ParamAdmin\ParamAdminBundle\Entity\SysAssociations", inversedBy="meetings")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="associations_id", referencedColumnName="id")
+     * })
+     */
+    private $associations;
+
+    /**
+     * @var \Member\MemberBundle\Entity\SysMembers
+     *
+     * @ORM\ManyToOne(targetEntity="Member\MemberBundle\Entity\SysMembers")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="members_id", referencedColumnName="id")
+     * })
+     * 
+     * @Groups({"member", "association", "meeting", "eat"})
+     */
+    private $members;
+
+
+
+    /**
+     * Set receptionDate
+     *
+     * @param \Date $receptionDate
+     *
+     * @return ParamMeeting
+     */
+    public function setReceptionDate($receptionDate)
+    {
+        $this->receptionDate = $receptionDate;
+
+        return $this;
+    }
+
+    /**
+     * Get receptionDate
+     *
+     * @return \Date
+     */
+    public function getReceptionDate()
+    {
+        return $this->receptionDate;
+    }
+
+    /**
+     * Set place
+     *
+     * @param string $place
+     *
+     * @return ParamMeeting
+     */
+    public function setPlace($place)
+    {
+        $this->place = $place;
+
+        return $this;
+    }
+
+    /**
+     * Get place
+     *
+     * @return string
+     */
+    public function getPlace()
+    {
+        return $this->place;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return ParamMeeting
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return ParamMeeting
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set sessions
+     *
+     * @param \ParamAdmin\ParamAdminBundle\Entity\SysSessions $sessions
+     *
+     * @return ParamMeeting
+     */
+    public function setSessions(\ParamAdmin\ParamAdminBundle\Entity\SysSessions $sessions = null)
+    {
+        $this->sessions = $sessions;
+
+        return $this;
+    }
+
+    /**
+     * Get sessions
+     *
+     * @return \ParamAdmin\ParamAdminBundle\Entity\SysSessions
+     */
+    public function getSessions()
+    {
+        return $this->sessions;
+    }
+
+    /**
+     * Set associations
+     *
+     * @param \ParamAdmin\ParamAdminBundle\Entity\SysAssociations $associations
+     *
+     * @return ParamMeeting
+     */
+    public function setAssociations(\ParamAdmin\ParamAdminBundle\Entity\SysAssociations $associations = null)
+    {
+        $this->associations = $associations;
+
+        return $this;
+    }
+
+    /**
+     * Get associations
+     *
+     * @return \ParamAdmin\ParamAdminBundle\Entity\SysAssociations
+     */
+    public function getAssociations()
+    {
+        return $this->associations;
+    }
+
+    /**
+     * Set members
+     *
+     * @param \Member\MemberBundle\Entity\SysMembers $members
+     *
+     * @return ParamMeeting
+     */
+    public function setMembers(\Member\MemberBundle\Entity\SysMembers $members = null)
+    {
+        $this->members = $members;
+
+        return $this;
+    }
+
+    /**
+     * Get members
+     *
+     * @return \Member\MemberBundle\Entity\SysMembers
+     */
+    public function getMembers()
+    {
+        return $this->members;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return ParamMeeting
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+    
+    
+    /***************      EVENEMENTS      ******************/
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function createDate() {
+        $this->setCreatedAt(new \DateTime());
+        $this->setUpdatedAt(new \DateTime());
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function updateDate() {
+        $this->setUpdatedAt(new \DateTime());
+    }
+}

@@ -1,0 +1,30 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/service_container.html
+parameters:
+    #parameter_name: value
+    
+services:
+    auth_token_user_provider:
+        class: Member\MemberBundle\Security\AuthTokenUserProvider
+        arguments: ["@auth_token_repository", "@user_repository"]
+        public:    false
+
+    auth_token_repository:
+        class:   Doctrine\ORM\EntityManager
+        factory: ["@doctrine.orm.entity_manager", "getRepository"]
+        arguments: ["MemberBundle:AuthToken"]
+
+    user_repository:
+        class:   Doctrine\ORM\EntityManager
+        factory: ["@doctrine.orm.entity_manager", "getRepository"]
+        arguments: ["MemberBundle:SysMembers"]
+
+    auth_token_authenticator:
+        class:     Member\MemberBundle\Security\AuthTokenAuthenticator
+        arguments: ["@security.http_utils"]
+        public:    false
+
+    param_admin_bundle.api_doc.fos_rest_form_errors_parser:
+        class: ParamAdmin\ParamAdminBundle\Parser\FOSRestFormErrorsParser
+        tags:
+            - { name: nelmio_api_doc.extractor.parser, priority: 1 }

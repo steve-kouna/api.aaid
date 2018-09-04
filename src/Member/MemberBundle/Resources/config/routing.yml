@@ -1,0 +1,3 @@
+member_homepage:
+    path:     /
+    defaults: { _controller: MemberBundle:Default:index }

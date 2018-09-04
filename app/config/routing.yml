@@ -1,0 +1,72 @@
+member_inscriptions:
+    type:     rest
+    resource: Member\MemberBundle\Controller\AssociationsMembersInscriptionController
+    
+member_sys_members:
+    type:     rest
+    resource: Member\MemberBundle\Controller\SysMembersController
+
+param_admin_sys_associations:
+    type:     rest
+    resource: ParamAdmin\ParamAdminBundle\Controller\SysAssociationsController
+
+param_admin_param_contributions:
+    type:     rest
+    resource: ParamAdmin\ParamAdminBundle\Controller\ParamContributionsController
+
+auth-tokens:
+    type:     rest
+    resource: Member\MemberBundle\Controller\AuthTokenController
+
+contributions_eat:
+    type:     rest
+    resource: ParamAdmin\ParamAdminBundle\Controller\ContributionsEatController
+
+param_admin_sys_chest:
+    type:     rest
+    resource: ParamAdmin\ParamAdminBundle\Controller\SysChestController
+
+param_admin_sys_sessions:
+    type:     rest
+    resource: ParamAdmin\ParamAdminBundle\Controller\SysSessionsController
+
+param_admin_param_meeting:
+    type:     rest 
+    resource: ParamAdmin\ParamAdminBundle\Controller\ParamMeetingController
+
+
+param_admin_param_sanctions:
+    type:     rest 
+    resource: ParamAdmin\ParamAdminBundle\Controller\ParamSanctionsController
+
+param_admin_param_offices:
+    type:     rest 
+    resource: ParamAdmin\ParamAdminBundle\Controller\ParamOfficesController
+
+param_admin_param_eat:
+    type:     rest 
+    resource: ParamAdmin\ParamAdminBundle\Controller\ParamEatController
+
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /doc
+
+#
+#fos_user_security:
+#    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+#
+#fos_user_profile:
+#    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+#    prefix: /profile
+#
+#fos_user_register:
+#    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+#    prefix: /register
+#
+#fos_user_resetting:
+#    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+#    prefix: /resetting
+#
+#fos_user_change_password:
+#    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+#    prefix: /profile
